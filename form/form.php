@@ -49,17 +49,19 @@ echo 'Время заполнения формы: '.$diff.' секунд <br/>';
 if ($password == md5('qwerty123'))
   echo 'Пароли совпадают! <br/>';
 
-$body = 'Имя: '.$name."\n".'Телефон: '.$phone."\n".'Сообщение: '.$message."\n".'Выбранные курсы: '.$courseValue."\n".'Время звонка: '.$callingRusValues[$calling]
+$body = 'Имя: '.$name."\n".'Телефон: '.$phone."\n".'Сообщение: '.$message."\n"
+.'Выбранные курсы: '.$courseValue."\n".'Время звонка: '.$callingRusValues[$calling]
 ."\n".'Время открытия формы: '.$startTime."\n"."Время отправки формы: ".$sendTime."\n"."Время заполнения формы: ".$diff.' секунд';
 
-//mail($to, $subject, $body, $from);
-/*
+mail($to, $subject, $body, $from);
+
 // Cоздание подключения к базе данных 
 $link = mysqli_connect($db_host, $db_user, $db_password, $db_base) or die('Ошибка' . mysqli_error($link));
 
  // Записываем в БД 
 $query_insert = 'INSERT INTO messages (name, message, phone, course, calling, startTime, sendTime, diff) 
-VALUES ("' . $name . '", "' . $message . '", "' . $phone . '", "' . $courseValue . '", "' . $callingRusValues[$calling] . '", "' . $startTime . '", "' . $sendTime . '", "' . $diff . '")'; 
+VALUES ("' . $name . '", "' . $message . '", "' . $phone . '", "' . $courseValue . '", 
+"' . $callingRusValues[$calling] . '", "' . $startTime . '", "' . $sendTime . '", "' . $diff . '")'; 
 mysqli_query($link, $query_insert) or die('Ошибка' . mysqli_error($link)); 
 
 //  Вывод из БД
@@ -74,6 +76,5 @@ mysqli_free_result($result);
 // Закрыть подключения к базе данных 
 mysqli_close($link); 
 
-*/
 ?>
 

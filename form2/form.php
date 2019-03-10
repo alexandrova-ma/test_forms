@@ -48,23 +48,25 @@ echo 'Время заполнения формы: '.$diff.' секунд <br/>';
 if ($password == md5('qwerty123'))
   echo 'Пароли совпадают! <br/>';
 
-$body = 'Имя: '.$name."\n".'Телефон: '.$phone."\n".'Сообщение: '.$message."\n".'Выбранные курсы: '.$courseValue."\n".'Время звонка: '.$callingRusValues[$calling]
+$body = 'Имя: '.$name."\n".'Телефон: '.$phone."\n".'Сообщение: '.$message."\n".'Выбранные курсы: '.$courseValue
+."\n".'Время звонка: '.$callingRusValues[$calling]
 ."\n".'Время открытия формы: '.$startTime."\n"."Время отправки формы: ".$sendTime."\n"."Время заполнения формы: ".$diff.' секунд';
 
-//mail($to, $subject, $body, $from);
-/*
+mail($to, $subject, $body, $from);
+
 
 $dsn = "mysql:host=$host;dbname=$db_name;";
 $pdo = new PDO($dsn, $username, $password, $opt);
 
-$stmt_insert = $pdo->prepare('INSERT INTO messages (name, phone, message, course, calling, startTime, sendTime, diff) VALUES  (?, ?, ?, ?, ?, ?, ?, ?)');
+$stmt_insert = $pdo->prepare('INSERT INTO messages (name, phone, message, course, calling, startTime, sendTime, diff)
+VALUES  (?, ?, ?, ?, ?, ?, ?, ?)');
 $stmt_insert->execute(array($name, $phone, $message, $courseValue, $callingRusValues[$calling], $startTime, $sendTime, $diff));
 
 $query_select = $pdo->query('SELECT * FROM `messages`')->fetchAll(PDO::FETCH_UNIQUE);
 foreach ($query_select as $row){
-    echo $row['id'] . $row['name'] .' '. $row['phone'] .' '. $row['massage'] .' '. $row['course'] .' '. $row['calling'] . ' '. $row['startTime'] .' '. $row['sendTime'] .' '. $row['diff'] . "<br/>";
+    echo $row['id'] . $row['name'] .' '. $row['phone'] .' '. $row['massage'] .' '
+    . $row['course'] .' '. $row['calling'] . ' '. $row['startTime'] .' '. $row['sendTime'] .' '. $row['diff'] . "<br/>";
 }
 
-*/
 ?>
 
