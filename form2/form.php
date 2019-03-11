@@ -45,8 +45,10 @@ else
   echo '<br>Время звонка: '.$callingRusValues[$calling].'<br/>';
 echo 'Время заполнения формы: '.$diff.' секунд <br/>';
 
-if ($password == md5('qwerty123'))
-  echo 'Пароли совпадают! <br/>';
+$salt = 'njdfvn84hndvj';
+$hesh = md5 ('qwerty123'.$salt);
+if ($password == md5('qwerty123'.$salt))
+  echo 'Пароли совпадают! <br/>'; 
 
 $body = 'Имя: '.$name."\n".'Телефон: '.$phone."\n".'Сообщение: '.$message."\n".'Выбранные курсы: '.$courseValue
 ."\n".'Время звонка: '.$callingRusValues[$calling]
