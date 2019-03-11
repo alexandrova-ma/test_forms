@@ -47,7 +47,6 @@ else
 echo 'Время заполнения формы: '.$diff.' секунд <br/>';
 
 $salt = 'njdfvn84hndvj';
-$hesh = md5 ('qwerty123'.$salt);
 if ($password == md5('qwerty123'.$salt))
   echo 'Пароли совпадают! <br/>'; 
 
