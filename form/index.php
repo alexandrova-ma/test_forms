@@ -1,4 +1,16 @@
-<? header('Content-Type: text/html; charset=utf-8'); ?>
+<? header('Content-Type: text/html; charset=utf-8'); 
+session_start();
+
+if($_GET['do'] == 'logout'){
+ unset($_SESSION['admin']);
+ session_destroy();
+}
+
+if(!$_SESSION['admin']){
+ header("Location: enter.php");
+ exit;
+}
+?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -40,5 +52,6 @@
         <input type="hidden" name="password" value="68dda9c33f2aedaa94999c3cb7c7d23f">
         <input type="submit">
     </form>
+    <a href="index.php?do=logout">Выход</a>
 </body>
 </html>

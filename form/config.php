@@ -8,5 +8,6 @@ $to = 'maryy-15@list.ru';
 $from = 'From:morost-ruz@mail.ru';
 $url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 $subject = 'Вам пришло письмо с сайта '.$url;
+$pass = '5f4dcc3b5aa765d61d8327deb882cf99';
 ?>
 

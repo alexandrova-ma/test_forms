@@ -21,34 +21,37 @@ if (!preg_match("/^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/", $phone)) {
   return;
 }
 
-if ( empty($phone) || empty($course) || empty($calling) ) 
+if ( empty($phone) || empty($course) || empty($calling) ) {
   echo 'Вы заполнили не все поля <br/>';
-  
+} 
 echo 'Имя: '.$name.'<br/>';
-if (empty($phone))
+if (empty($phone)) {
   echo 'Телефон: вы не ввели номер телефона <br/>';
+}
 echo 'Телефон: '.$phone.'<br/>';
 echo 'Сообщение: '.$message.'<br/>';
 echo 'Выбранные курсы: ';
 if (count($course)==0) {
   echo 'не выбрано';
-  }
+}
 else {
   foreach ($course as $a) {
-  $courseValue.=$a.' ';
-  echo $a.' ';
+    $courseValue.=$a.' ';
+    echo $a.' ';
   }
 }
-if (empty($calling))
+if (empty($calling)) {
   echo '<br/> Время звонка: вы не выбрали время звонка <br/>';
-else 
+}
+else {
   echo '<br>Время звонка: '.$callingRusValues[$calling].'<br/>';
+}
 echo 'Время заполнения формы: '.$diff.' секунд <br/>';
 
 $salt = 'njdfvn84hndvj';
-if ($password == md5('qwerty123'.$salt))
+if ($password == md5('qwerty123'.$salt)) {
   echo 'Пароли совпадают! <br/>'; 
-
+}
 $body = 'Имя: '.$name."\n".'Телефон: '.$phone."\n".'Сообщение: '.$message."\n".'Выбранные курсы: '.$courseValue
 ."\n".'Время звонка: '.$callingRusValues[$calling]
 ."\n".'Время открытия формы: '.$startTime."\n"."Время отправки формы: ".$sendTime."\n"."Время заполнения формы: ".$diff.' секунд';

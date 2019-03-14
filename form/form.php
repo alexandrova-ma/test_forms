@@ -21,48 +21,75 @@ if (!preg_match("/^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/", $phone)) {
   echo 'Телефон: некорректное значение<br/>';
   return;
 }
-
-if ( empty($phone) || empty($course) || empty($calling) ) 
+echo '<table style="border: 1px solid black; border-collapse: collapse; margin-bottom: 5px">';
+if ( empty($phone) || empty($course) || empty($calling) ) {
   echo 'Вы заполнили не все поля <br/>';
-  
-echo 'Имя: '.$name.'<br/>';
-if (empty($phone))
-  echo 'Телефон: вы не ввели номер телефона <br/>';
-echo 'Телефон: '.$phone.'<br/>';
-echo 'Сообщение: '.$message.'<br/>';
-echo 'Выбранные курсы: ';
+} 
+echo '<tr> <td>Имя:</td>'.'<td>'.$name.'</td> </tr>';
+if (empty($phone)) {
+  echo '<tr> <td>Телефон:</td> <td>вы не ввели номер телефона</td> </tr>';
+}
+echo '<tr> <td>Телефон:</td>'.'<td>'.$phone.'</td> </tr>';
+echo '<tr> <td>Сообщение:</td>'.'<td>'.$message.'</td> </tr>';
+echo '<tr> <td>Выбранные курсы:</td>';
 if (count($course)==0) {
-  echo 'не выбрано';
-  }
+  echo '<td>не выбрано</td> </tr>';
+}
 else {
   foreach ($course as $a) {
   $courseValue.=$a.' ';
-  echo $a.' ';
+  echo '<td>'.$a.' ';
+  echo '</td> </tr>';
   }
 }
-if (empty($calling))
-  echo '<br/> Время звонка: вы не выбрали время звонка <br/>';
-else 
-  echo '<br>Время звонка: '.$callingRusValues[$calling].'<br/>';
-echo 'Время заполнения формы: '.$diff.' секунд <br/>';
+if (empty($calling)) {
+  echo '<tr> <td>>Время звонка: </td> <td>вы не выбрали время звонка</td> </tr>';
+}
+else {
+  echo '<tr> <td>Время звонка:</td> '.'<td>'.$callingRusValues[$calling].'</td></tr>';
+}
+if ($diff>=3600) {
+  $diffHour = intval ($diff/3600);
+  $diffRemainder = $diff%3600;
+  if ($diffRemainder>=60) {
+    $diffMin = intval ($diffRemainder/60);
+    $diffSec = $diffRemainder%60;
+  }
+  echo '<tr> <td>Время заполнения формы: </td> '.'<td>'.$diffHour.' часов '.$diffMin.' минут '.$diffSec.' секунд</td> </tr>';
+}
+if ($diff>=60 AND $diff<3600) {
+  $diffMin2 = intval ($diff/60);
+  $diffSec2 = $diff%60;
+  echo '<tr> <td>Время заполнения формы: </td>'.'<td>'.$diffMin2.' минут '.$diffSec2.' секунд</td></tr>';
+}
+else {
+ if ($diff<60) {
+  echo '<tr> <td>Время заполнения формы: </td>'.'<td>'.$diff.' секунд</td></tr>';
+  }
+}
+echo '</table>';
 
 $salt = 'njdfvn84hndvj';
 if ($password == md5('qwerty123'.$salt))
   echo 'Пароли совпадают! <br/>'; 
 
-$body = 'Имя: '.$name."\n".'Телефон: '.$phone."\n".'Сообщение: '.$message."\n"
-.'Выбранные курсы: '.$courseValue."\n".'Время звонка: '.$callingRusValues[$calling]
+$body = 'Имя: '.$name."\n".'Телефон: '.$phone."\n".'Сообщение: '.$message."\n".'Выбранные курсы: '.$courseValue."\n".'Время звонка: '.$callingRusValues[$calling]
 ."\n".'Время открытия формы: '.$startTime."\n"."Время отправки формы: ".$sendTime."\n"."Время заполнения формы: ".$diff.' секунд';
 
-mail($to, $subject, $body, $from);
-
+$mail = mail($to, $subject, $body, $from);
+if ($mail) {
+  echo 'Письмо отправлено! <br/>';
+}
+else {
+  echo 'Письмо не отправлено! <br/>';
+}
+/*
 // Cоздание подключения к базе данных 
 $link = mysqli_connect($db_host, $db_user, $db_password, $db_base) or die('Ошибка' . mysqli_error($link));
 
  // Записываем в БД 
 $query_insert = 'INSERT INTO messages (name, message, phone, course, calling, startTime, sendTime, diff) 
-VALUES ("' . $name . '", "' . $message . '", "' . $phone . '", "' . $courseValue . '", 
-"' . $callingRusValues[$calling] . '", "' . $startTime . '", "' . $sendTime . '", "' . $diff . '")'; 
+VALUES ("' . $name . '", "' . $message . '", "' . $phone . '", "' . $courseValue . '", "' . $callingRusValues[$calling] . '", "' . $startTime . '", "' . $sendTime . '", "' . $diff . '")'; 
 mysqli_query($link, $query_insert) or die('Ошибка' . mysqli_error($link)); 
 
 //  Вывод из БД
@@ -77,5 +104,6 @@ mysqli_free_result($result);
 // Закрыть подключения к базе данных 
 mysqli_close($link); 
 
+*/
 ?>
 
